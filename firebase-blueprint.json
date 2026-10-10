@@ -1,0 +1,118 @@
+{
+  "entities": {
+    "Branch": {
+      "title": "Branch",
+      "description": "Company regional branch definition",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "code": { "type": "string" },
+        "managerName": { "type": "string" },
+        "adminOfficer": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "address": { "type": "string" },
+        "city": { "type": "string" },
+        "status": { "type": "string", "enum": ["نشط", "تحت التوسعة", "مؤقت"] },
+        "createdDate": { "type": "string" }
+      },
+      "required": ["id", "name", "code", "managerName", "adminOfficer", "status"]
+    },
+    "Worker": {
+      "title": "Worker",
+      "description": "Employee or contractor personnel file",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "employeeNumber": { "type": "string" },
+        "fullName": { "type": "string" },
+        "nationality": { "type": "string" },
+        "jobTitle": { "type": "string" },
+        "phone": { "type": "string" },
+        "branchId": { "type": "string" },
+        "teamId": { "type": "string" },
+        "status": { "type": "string" },
+        "hireDate": { "type": "string" },
+        "contractEndDate": { "type": "string" },
+        "residencyStatus": { "type": "string" },
+        "isCompanySponsorship": { "type": "boolean" }
+      },
+      "required": ["id", "employeeNumber", "fullName", "branchId", "status"]
+    },
+    "Equipment": {
+      "title": "Equipment",
+      "description": "Heavy machinery or vehicle asset",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "equipmentNumber": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "brand": { "type": "string" },
+        "model": { "type": "string" },
+        "manufactureYear": { "type": "number" },
+        "branchId": { "type": "string" },
+        "status": { "type": "string" },
+        "operatingHours": { "type": "number" }
+      },
+      "required": ["id", "equipmentNumber", "name", "branchId", "status"]
+    },
+    "MaintenanceReport": {
+      "title": "MaintenanceReport",
+      "description": "10-stage maintenance and fault incident report",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "reportNumber": { "type": "string" },
+        "equipmentId": { "type": "string" },
+        "equipmentNumber": { "type": "string" },
+        "branchId": { "type": "string" },
+        "priority": { "type": "string" },
+        "currentStageIndex": { "type": "number" },
+        "totalCost": { "type": "number" },
+        "status": { "type": "string" }
+      },
+      "required": ["id", "reportNumber", "equipmentId", "branchId", "priority", "currentStageIndex", "status"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Employee user account and role permission profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "username": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string" },
+        "branchId": { "type": "string" },
+        "branchName": { "type": "string" },
+        "phone": { "type": "string" },
+        "isActive": { "type": "boolean" }
+      },
+      "required": ["id", "name", "role", "email"]
+    }
+  },
+  "firestore": {
+    "/branches/{branchId}": {
+      "schema": "Branch",
+      "description": "Regional contracting branches"
+    },
+    "/workers/{workerId}": {
+      "schema": "Worker",
+      "description": "Workforce records"
+    },
+    "/equipment/{equipmentId}": {
+      "schema": "Equipment",
+      "description": "Fleet machinery and vehicles"
+    },
+    "/maintenanceReports/{reportId}": {
+      "schema": "MaintenanceReport",
+      "description": "Incident and repair tracking reports"
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profiles and credentials"
+    }
+  }
+}
